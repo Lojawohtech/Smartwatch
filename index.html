@@ -21,16 +21,17 @@
             margin: 50px auto;
             background-color: #FFCA92;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px; /* Aumentei o valor para um visual mais arredondado */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         #profile-picture {
-            border-radius: 50%;
-            width: 70%;
+            border-radius: 100%;
+            width: 50%;
+            max-width: 150px; /* Ajuste conforme necessário */
             height: auto;
             object-fit: cover;
-            margin-bottom: 10px;
+            margin-bottom: 20px; /* Aumentei a margem inferior para um visual melhor */
         }
 
         .button {
@@ -47,10 +48,12 @@
         @media screen and (max-width: 480px) {
             #container {
                 width: 100%;
+                border-radius: 0; /* Removi o border-radius para cantos quadrados em telas pequenas */
             }
 
             #profile-picture {
-                width: 90%;
+                width: 70%;
+                max-width: none; /* Removi o limite máximo de largura */
             }
 
             .button {
@@ -65,7 +68,7 @@
 
     <div id="container">
         <!-- Insira sua foto abaixo -->
-        <img id="profile-picture" src="./images/img.jpeg" alt="Loja">
+        <img id="profile-picture" src="./images/img.png " alt="Loja">
 
         <div>
             <h2>
