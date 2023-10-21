@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +15,9 @@
         }
 
         #container {
-            width: 700px; /* Definir largura como 100% */
-            height: 900px; /* Ajustar a altura conforme necessário */
+            width: 90%;
+            max-width: 600px;
+            height: auto;
             margin: 50px auto;
             background-color: #FFCA92;
             padding: 20px;
@@ -23,45 +25,60 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-
         #profile-picture {
             border-radius: 50%;
-            width: 150px;
-            height: 150px;
+            width: 70%;
+            height: auto;
             object-fit: cover;
             margin-bottom: 10px;
         }
 
         .button {
             display: block;
-            background-color: #000000 ;
+            background-color: #000000;
             color: #fff;
-            padding: 10px 20px;
+            padding: 15px;
             border-radius: 30px;
             text-decoration: none;
-            margin: 10px auto;
-            font-size: 20px;
+            margin: 15px auto;
+            font-size: 18px;
         }
 
+        @media screen and (max-width: 480px) {
+            #container {
+                width: 100%;
+            }
+
+            #profile-picture {
+                width: 90%;
+            }
+
+            .button {
+                font-size: 16px;
+                padding: 10px 15px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
-<div id="container">
-    <!-- Insira sua foto abaixo -->
-    <img id="profile-picture" src="./images/img.jpeg" alt="Loja">
+    <div id="container">
+        <!-- Insira sua foto abaixo -->
+        <img id="profile-picture" src="./images/img.jpeg" alt="Loja">
 
-    <div>
-        <h2>
-            O melhor jeito de comprar o que vc ama!
-        </h2>
+        <div>
+            <h2>
+                O melhor jeito de comprar o que vc ama!
+            </h2>
+        </div>
+
+        <!-- Botões -->
+        <a class="button" href="link1.html">Atendimento Whatsapp</a>
+        <a class="button" href="link2.html">Botão 2</a>
+        <a class="button" href="link3.html">Botão 3</a>
     </div>
 
-    <!-- Botões -->
-    <a class="button" href="link1.html">Atendimento Whatsapp</a>
-    <a class="button" href="link2.html">Botão 2</a>
-    <a class="button" href="link3.html">Botão 3</a>
-</div>
-
 </body>
+
 </html>
