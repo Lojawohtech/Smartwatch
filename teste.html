@@ -1,183 +1,174 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página com Carrossel + Links</title>
+  <title>Loja Wohtech</title>
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #000000, #ff8800);
+      background: #000;
+      color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
+      padding: 20px;
     }
 
-    /* ==== CARROSSEL ==== */
+    /* Cabeçalho */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      text-align: left;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    header img {
+      width: 60px;
+      height: 60px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    header p {
+      font-size: 16px;
+      font-style: italic;
+    }
+
+    /* Carrossel */
     .carousel {
       position: relative;
       width: 100%;
-      max-width: 300px;
+      max-width: 600px;
+      aspect-ratio: 1 / 1; /* quadrado */
       overflow: hidden;
-      margin: 0px auto;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border-radius: 20px;
+      margin-bottom: 30px;
     }
 
     .carousel_wrapper {
       display: flex;
       transition: transform 0.5s ease-in-out;
+      height: 100%;
     }
 
-    .carousel_card {
+    .card {
       min-width: 100%;
-      transition: opacity 0.5s;
-      position: relative;
+      height: 100%;
     }
 
-    .carousel_card img {
+    .card img {
       width: 100%;
-      display: block;
-      border-radius: 15px;
-    }
-
-    .carousel_nav {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
     }
 
     .carousel_btn {
-      background: rgba(255,255,255,0.7);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
       border: none;
+      font-size: 24px;
+      cursor: pointer;
       padding: 10px;
       border-radius: 50%;
-      cursor: pointer;
-      margin: 0 10px;
+      z-index: 2;
     }
 
-    /* ==== PERFIL ==== */
-    .card {
+    .carousel_btn.left {
+      left: 10px;
+    }
+
+    .carousel_btn.right {
+      right: 10px;
+    }
+
+    /* Botões com foto */
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       width: 100%;
-      max-width: 400px;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      background: #000;
-      color: #fff;
-      text-align: center;
-      margin-bottom: 30px;
+      max-width: 600px;
     }
 
-    .profile {
-      padding: 20px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.9));
-    }
-
-    .profile img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #fff;
-      margin-bottom: 15px;
-    }
-
-    .profile h2 {
-      margin: 5px 0;
-      font-size: 22px;
-    }
-
-    .profile p {
-      margin: 0;
-      font-size: 14px;
-      opacity: 0.9;
-    }
-
-    /* ==== BOTÕES LIQUID GLASS ==== */
-    .button {
+    .btn-card {
       display: flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 15px;
-      padding: 15px;
-      margin: 15px 20px;
+      border-radius: 20px;
+      overflow: hidden;
       text-decoration: none;
-      color: #000;
+      color: #fff;
       font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      transition: transform 0.2s ease, background 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease;
     }
 
-    .button:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.4);
+    .btn-card:hover {
+      transform: scale(1.05);
     }
 
-    .button img {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      margin-right: 15px;
+    .btn-card img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
     }
 
-    .button span {
-      font-size: 16px;
+    .btn-card span {
       flex: 1;
-      text-align: left;
-      color: #000;
+      text-align: center;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
 
+  <!-- Cabeçalho -->
+  <header>
+    <img src="images/img.png" alt="Logo">
+    <div>
+      <h1>Loja wohtech</h1>
+      <p>Campo Grande ms</p>
+    </div>
+  </header>
+
   <!-- Carrossel -->
-  <div class="carousel">
+  <div class="carousel" id="carousel">
     <div class="carousel_wrapper" id="carouselWrapper">
-      <div class="carousel_card"><img src="./images/4.png" alt="Imagem 1"></div>
-      <div class="carousel_card"><img src="./images/5.png" alt="Imagem 2"></div>
-      <div class="carousel_card"><img src="./images/22.png" alt="Imagem 3"></div>
+      <div class="card"><img src="images/22.png" alt="Slide 1"></div>
+      <div class="card"><img src="images/4.png" alt="Slide 2"></div>
+      <div class="card"><img src="images/5.png" alt="Slide 3"></div>
     </div>
-    <div class="carousel_nav">
-      <button class="carousel_btn" id="prevBtn">◀</button>
-      <button class="carousel_btn" id="nextBtn">▶</button>
-    </div>
+    <button class="carousel_btn left" id="prevBtn">&#10094;</button>
+    <button class="carousel_btn right" id="nextBtn">&#10095;</button>
   </div>
 
-  <!-- Card de Perfil -->
-  <div class="card">
-    <div class="profile">
-      <img src="./images/profile.jpg" alt="Foto de Perfil">
-      <h2>Jacob Kent</h2>
-      <p>Marketing Manager</p>
-      <p>Teamwork.Co</p>
-    </div>
-
-    <a href="https://facebook.com" class="button">
-      <img src="./images/facebook.png" alt="Facebook">
-      <span>Facebook</span>
+  <!-- Botões com foto -->
+  <div class="btn-container">
+    <a href="https://wa.me/seunumerodetelefone" target="_blank" class="btn-card">
+      <img src="images/img.png" alt="Botão 1">
+      <span>Whatsapp</span>
     </a>
-
-    <a href="https://instagram.com" class="button">
-      <img src="./images/instagram.png" alt="Instagram">
-      <span>Instagram</span>
-    </a>
-
-    <a href="https://wa.me/5567981140649" class="button">
-      <img src="./images/whatsapp.png" alt="Whatsapp">
-      <span>WhatsApp</span>
+    <a href="https://wa.me/seunumerodetelefone" target="_blank" class="btn-card">
+      <img src="images/img.png" alt="Botão 2">
+      <span>Grupo VIP</span>
     </a>
   </div>
 
@@ -185,19 +176,67 @@
     const wrapper = document.getElementById("carouselWrapper");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
+    const cards = document.querySelectorAll(".card");
+    const carousel = document.getElementById("carousel");
 
-    let index = 0;
-    const total = wrapper.children.length;
+    let currentIndex = 0;
+    let autoplayInterval;
 
-    function showSlide(i) {
-      if (i >= total) index = 0;
-      else if (i < 0) index = total - 1;
-      else index = i;
-      wrapper.style.transform = `translateX(${-index * 100}%)`;
+    function updateCarousel() {
+      wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
 
-    nextBtn.addEventListener("click", () => showSlide(index + 1));
-    prevBtn.addEventListener("click", () => showSlide(index - 1));
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % cards.length;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      updateCarousel();
+    }
+
+    // Botões
+    prevBtn.addEventListener("click", () => {
+      prevSlide();
+      resetAutoplay();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      nextSlide();
+      resetAutoplay();
+    });
+
+    // Autoplay
+    function startAutoplay() {
+      autoplayInterval = setInterval(nextSlide, 4000);
+    }
+
+    function resetAutoplay() {
+      clearInterval(autoplayInterval);
+      startAutoplay();
+    }
+
+    startAutoplay();
+
+    // Swipe no celular
+    let startX = 0;
+    let endX = 0;
+
+    carousel.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    carousel.addEventListener("touchend", (e) => {
+      endX = e.changedTouches[0].clientX;
+      if (startX > endX + 50) {
+        nextSlide();
+        resetAutoplay();
+      } else if (startX < endX - 50) {
+        prevSlide();
+        resetAutoplay();
+      }
+    });
   </script>
 
 </body>
