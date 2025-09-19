@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página com Carrossel + Links</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #000000, #ff8800);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* ==== CARROSSEL ==== */
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 300px;
+      overflow: hidden;
+      margin: 0px auto;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .carousel_wrapper {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel_card {
+      min-width: 100%;
+      transition: opacity 0.5s;
+      position: relative;
+    }
+
+    .carousel_card img {
+      width: 100%;
+      display: block;
+      border-radius: 15px;
+    }
+
+    .carousel_nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .carousel_btn {
+      background: rgba(255,255,255,0.7);
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+
+    /* ==== PERFIL ==== */
+    .card {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      background: #000;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .profile {
+      padding: 20px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.9));
+    }
+
+    .profile img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      margin-bottom: 15px;
+    }
+
+    .profile h2 {
+      margin: 5px 0;
+      font-size: 22px;
+    }
+
+    .profile p {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    /* ==== BOTÕES LIQUID GLASS ==== */
+    .button {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 15px;
+      margin: 15px 20px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .button img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .button span {
+      font-size: 16px;
+      flex: 1;
+      text-align: left;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Carrossel -->
+  <div class="carousel">
+    <div class="carousel_wrapper" id="carouselWrapper">
+      <div class="carousel_card"><img src="./images/4.png" alt="Imagem 1"></div>
+      <div class="carousel_card"><img src="./images/5.png" alt="Imagem 2"></div>
+      <div class="carousel_card"><img src="./images/22.png" alt="Imagem 3"></div>
+    </div>
+    <div class="carousel_nav">
+      <button class="carousel_btn" id="prevBtn">◀</button>
+      <button class="carousel_btn" id="nextBtn">▶</button>
+    </div>
+  </div>
+
+  <!-- Card de Perfil -->
+  <div class="card">
+    <div class="profile">
+      <img src="./images/profile.jpg" alt="Foto de Perfil">
+      <h2>Jacob Kent</h2>
+      <p>Marketing Manager</p>
+      <p>Teamwork.Co</p>
+    </div>
+
+    <a href="https://facebook.com" class="button">
+      <img src="./images/facebook.png" alt="Facebook">
+      <span>Facebook</span>
+    </a>
+
+    <a href="https://instagram.com" class="button">
+      <img src="./images/instagram.png" alt="Instagram">
+      <span>Instagram</span>
+    </a>
+
+    <a href="https://wa.me/5567981140649" class="button">
+      <img src="./images/whatsapp.png" alt="Whatsapp">
+      <span>WhatsApp</span>
+    </a>
+  </div>
+
+  <script>
+    const wrapper = document.getElementById("carouselWrapper");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let index = 0;
+    const total = wrapper.children.length;
+
+    function showSlide(i) {
+      if (i >= total) index = 0;
+      else if (i < 0) index = total - 1;
+      else index = i;
+      wrapper.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    nextBtn.addEventListener("click", () => showSlide(index + 1));
+    prevBtn.addEventListener("click", () => showSlide(index - 1));
+  </script>
+
+</body>
+</html>
