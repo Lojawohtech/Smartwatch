@@ -13,6 +13,7 @@
       min-height: 100vh;
     }
 
+    /* ===== canvas de fundo ===== */
     #space {
       position: fixed;
       inset: 0;
@@ -24,6 +25,7 @@
       display: block;
     }
 
+    /* ===== conteúdo ===== */
     .content {
       position: relative;
       z-index: 1;
@@ -35,6 +37,7 @@
       min-height: 100vh;
     }
 
+    /* Cabeçalho */
     header {
       display: flex;
       flex-direction: column;
@@ -52,6 +55,7 @@
     header h1 { font-size: 28px; font-weight: bold; }
     header p { font-size: 16px; }
 
+    /* Botões com foto */
     .btn-container {
       display: flex;
       flex-direction: column;
@@ -87,46 +91,81 @@
     .btn-text .title { font-size: 18px; font-weight: bold; }
     .btn-text .subtitle { font-size: 14px; font-weight: normal; opacity: 0.75; }
 
+    /* Texto de desconto */
+    .discount-text {
+      font-size: 18px;
+      font-weight: bold;
+      color: #f7a900;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    /* Carrossel */
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 20px;
+      margin-bottom: 8px;
+      background: rgba(0,0,0,0.25);
+    }
+    .carousel_wrapper { display:flex; transition: transform 0.5s ease-in-out; height:100%; }
+    .card { min-width:100%; height:100%; position: relative; }
+    .card img { width:100%; height:100%; object-fit: cover; border-radius:20px; }
+
+    /* Botão Liquid Glass */
+    .liquid-btn {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 18px 50px;
+      border-radius: 35px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      font-weight: bold;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+    .liquid-btn:hover {
+      transform: translateX(-50%) scale(1.08);
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .carousel_btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 50%;
+      z-index: 2;
+    }
+    .carousel_btn.left { left: 10px; }
+    .carousel_btn.right { right: 10px; }
+
+    /* Responsividade */
     @media (max-width: 480px) {
       header img { width: 60px; height: 60px; }
       header h1 { font-size: 20px; }
       .btn-card img { width: 60px; height: 60px; }
       .btn-text .title { font-size: 16px; }
       .btn-text .subtitle { font-size: 12px; }
+      .discount-text { font-size: 16px; }
+      .liquid-btn { font-size: 16px; padding: 14px 36px; }
     }
   </style>
 </head>
-
-<!-- TikTok Pixel Code Start -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-
-  ttq.load('D36O1ORC77U15FSVMK6G');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
- <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1656747348330083');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1656747348330083&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 <body>
 
   <canvas id="space" aria-hidden="true"></canvas>
@@ -154,6 +193,49 @@ src="https://www.facebook.com/tr?id=1656747348330083&ev=PageView&noscript=1"
         </div>
       </a>
     </div>
+
+    <div class="discount-text">🤩 VOCÊ GANHOU 20% DE DESCONTO NOS ITENS ABAIXO 👇🏼</div>
+
+    <div class="carousel" id="carousel">
+  <div class="carousel_wrapper" id="carouselWrapper">
+    
+    <div class="card">
+      <img src="images/fone.jpeg" alt="Slide 1">
+      <a href="https://wa.me/5567981140649?text=Quero%20comprar%20o%20Fone%20de%20Ouvido%20🔥" 
+         class="liquid-btn" target="_blank">
+         Pedir Agora
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="images/2.png" alt="Slide 2">
+      <a href="https://wa.me/5567981140649?text=Quero%20comprar%20o%20Produto%202%20🔥" 
+         class="liquid-btn" target="_blank">
+         Pedir Agora
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="images/3.png" alt="Slide 3">
+      <a href="https://wa.me/5567981140649?text=Quero%20comprar%20o%20Produto%203%20🔥" 
+         class="liquid-btn" target="_blank">
+         Pedir Agora
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="images/7.png" alt="Slide 4">
+      <a href="https://wa.me/5567981140649?text=Quero%20comprar%20o%20Produto%204%20🔥" 
+         class="liquid-btn" target="_blank">
+         Pedir Agora
+      </a>
+    </div>
+
+  </div>
+
+  <button class="carousel_btn left" id="prevBtn">&#10094;</button>
+  <button class="carousel_btn right" id="nextBtn">&#10095;</button>
+</div>
 
   </div>
 
@@ -221,6 +303,25 @@ src="https://www.facebook.com/tr?id=1656747348330083&ev=PageView&noscript=1"
       resize();
       requestAnimationFrame(loop);
     })();
+
+    /* ===== Carrossel ===== */
+    const wrapper = document.getElementById("carouselWrapper");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const totalSlides = document.querySelectorAll(".card").length;
+    let index = 0;
+
+    function showSlide(i) {
+      if (i >= totalSlides) index = 0;
+      else if (i < 0) index = totalSlides - 1;
+      else index = i;
+      wrapper.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    nextBtn.addEventListener("click", () => showSlide(index + 1));
+    prevBtn.addEventListener("click", () => showSlide(index - 1));
+
+    setInterval(() => { showSlide(index + 1); }, 4000);
   </script>
 </body>
 </html>
