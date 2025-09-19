@@ -1,78 +1,327 @@
 <!DOCTYPE html>
-<html lang="pt">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Links da Loja</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #FF901D;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loja Wohtech</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+    }
 
-        #container {
-            width: 90%;
-            max-width: 600px;
-            height: auto;
-            margin: 50px auto;
-            background-color: #FFCA92;
-            padding: 20px;
-            border-radius: 15px; /* Aumentei o valor para um visual mais arredondado */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    /* ===== canvas de fundo ===== */
+    #space {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      background: #000;
+      display: block;
+    }
 
-        #profile-picture {
-            border-radius: 100%;
-            width: 50%;
-            max-width: 150px; /* Ajuste conforme necessário */
-            height: auto;
-            object-fit: cover;
-            margin-bottom: 20px; /* Aumentei a margem inferior para um visual melhor */
-        }
+    /* ===== conteúdo ===== */
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      gap: 16px;
+      min-height: 100vh;
+    }
 
-        .button {
-            display: block;
-            background-color: #000000;
-            color: #fff;
-            padding: 15px;
-            border-radius: 30px;
-            text-decoration: none;
-            margin: 15px auto;
-            font-size: 18px;
-        }
+    /* Cabeçalho */
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    header img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    header h1 { font-size: 28px; font-weight: bold; }
+    header p { font-size: 16px; }
 
-        
-    </style>
+    /* Botões com foto */
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 6px;
+    }
+    .btn-card {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      overflow: hidden;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.45);
+      transition: transform 0.2s ease;
+      padding: 6px 12px;
+      gap: 12px;
+    }
+    .btn-card:hover { transform: scale(1.03); }
+    .btn-card img { width:80px; height:80px; object-fit: cover; border-radius: 12px; }
 
+    .btn-text {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      text-align: left;
+    }
+    .btn-text .title { font-size: 18px; font-weight: bold; }
+    .btn-text .subtitle { font-size: 14px; font-weight: normal; opacity: 0.75; }
 
-    
+    /* Texto de desconto */
+    .discount-text {
+      font-size: 18px;
+      font-weight: bold;
+      color: #f7a900;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    /* Carrossel */
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 20px;
+      margin-bottom: 8px;
+      background: rgba(0,0,0,0.25);
+    }
+    .carousel_wrapper { display:flex; transition: transform 0.5s ease-in-out; height:100%; }
+    .card { min-width:100%; height:100%; position: relative; }
+    .card img { width:100%; height:100%; object-fit: cover; border-radius:20px; }
+
+    /* Botão Liquid Glass */
+    .liquid-btn {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 18px 50px;
+      border-radius: 35px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      font-weight: bold;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+    .liquid-btn:hover {
+      transform: translateX(-50%) scale(1.08);
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .carousel_btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 50%;
+      z-index: 2;
+    }
+    .carousel_btn.left { left: 10px; }
+    .carousel_btn.right { right: 10px; }
+
+    /* Responsividade */
+    @media (max-width: 480px) {
+      header img { width: 60px; height: 60px; }
+      header h1 { font-size: 20px; }
+      .btn-card img { width: 60px; height: 60px; }
+      .btn-text .title { font-size: 16px; }
+      .btn-text .subtitle { font-size: 12px; }
+      .discount-text { font-size: 16px; }
+      .liquid-btn { font-size: 16px; padding: 14px 36px; }
+    }
+  </style>
 </head>
-
 <body>
 
-    <div id="container">
-        <!-- Insira sua foto abaixo -->
-        <img id="profile-picture" src="./images/img.png " alt="Loja">
+  <canvas id="space" aria-hidden="true"></canvas>
 
-        <div>
-            <h2>
-                Obrigado por Comprar Seu Smartwatch Conosco🤩!
-            </h2>
-            <h3>
-                Clique no botão abaixo, para validar o pagamento✅
-            </h3>            
+  <div class="content">
+    <header>
+      <img src="images/img.png" alt="Logo">
+      <h1>Loja Wohtech</h1>
+      <p><span style="color: #f7a900;"><strong>😍 PARABÉNS PELA SUA COMPRA 🛍️</strong></span></p>
+    </header>
+
+    <div class="btn-container">
+      <a href="#" target="_blank" class="btn-card">
+        <img src="images/app-store.png" alt="Botão 1">
+        <div class="btn-text">
+          <span class="title">Baixe o App para iPhone</span>
+          <span class="subtitle">Apple Store</span>
         </div>
-
-        <!-- Botões -->
-        <a class="button" href="https://wa.me/5567981140649?text=Pagamento+Finalizado+%E2%9C%85%2C+Confirme+por+gentileza%21">Voltar para Conversa com Atendente</a>
-                
-
+      </a>
+      <a href="#" target="_blank" class="btn-card">
+        <img src="images/play.png" alt="Botão 2">
+        <div class="btn-text">
+          <span class="title">Baixe o App para Android</span>
+          <span class="subtitle">Play Store</span>
+        </div>
+      </a>
     </div>
 
-</body>
+    <div class="discount-text">🤩 VOCÊ GANHOU 20% DE DESCONTO NOS ITENS ABAIXO 👇🏼</div>
 
+    <div class="carousel" id="carousel">
+  <div class="carousel_wrapper" id="carouselWrapper">
+    
+    <div class="card">
+      <img src="images/fone.jpeg" alt="Slide 1">
+      <a href="https://wa.me/5567981140649?text=Quero%20comprar%20o%20Fone%20de%20Ouvido%20🔥" 
+         class="liquid-btn" target="_blank">
+         Pedir Agora
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="images/2.png" alt="Slide 2">
+      <a href="https://wa.me/5567981140649?text=Quero%20comprar%20o%20Produto%202%20🔥" 
+         class="liquid-btn" target="_blank">
+         Pedir Agora
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="images/3.png" alt="Slide 3">
+      <a href="https://wa.me/5567981140649?text=Quero%20comprar%20o%20Produto%203%20🔥" 
+         class="liquid-btn" target="_blank">
+         Pedir Agora
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="images/7.png" alt="Slide 4">
+      <a href="https://wa.me/5567981140649?text=Quero%20comprar%20o%20Produto%204%20🔥" 
+         class="liquid-btn" target="_blank">
+         Pedir Agora
+      </a>
+    </div>
+
+  </div>
+
+  <button class="carousel_btn left" id="prevBtn">&#10094;</button>
+  <button class="carousel_btn right" id="nextBtn">&#10095;</button>
+</div>
+
+  </div>
+
+  <script>
+    /* ===== Fundo Espacial ===== */
+    (function initSpace() {
+      const canvas = document.getElementById('space');
+      const ctx = canvas.getContext('2d');
+      let stars = [];
+      let width, height, dpr;
+      let lastTime = performance.now();
+
+      function resize() {
+        dpr = window.devicePixelRatio || 1;
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        stars = [];
+        const area = width * height;
+        const base = Math.max(60, Math.round(area / 6000));
+        for (let i = 0; i < base; i++) {
+          stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            size: Math.random() * 1.6 + 0.3,
+            speed: Math.random() * 60 + 8,
+            twinkle: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      function draw(dt) {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let s of stars) {
+          s.x -= s.speed * dt;
+          if (s.x < -4) s.x = width + 4;
+
+          s.twinkle += dt * 3;
+          const alpha = 0.6 + 0.4 * Math.sin(s.twinkle);
+
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+          ctx.shadowBlur = s.size * 2;
+          ctx.shadowColor = 'rgba(255,255,255,0.15)';
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      }
+
+      function loop(now) {
+        const dt = Math.min(0.06, (now - lastTime) / 1000);
+        lastTime = now;
+        draw(dt);
+        requestAnimationFrame(loop);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      requestAnimationFrame(loop);
+    })();
+
+    /* ===== Carrossel ===== */
+    const wrapper = document.getElementById("carouselWrapper");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const totalSlides = document.querySelectorAll(".card").length;
+    let index = 0;
+
+    function showSlide(i) {
+      if (i >= totalSlides) index = 0;
+      else if (i < 0) index = totalSlides - 1;
+      else index = i;
+      wrapper.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    nextBtn.addEventListener("click", () => showSlide(index + 1));
+    prevBtn.addEventListener("click", () => showSlide(index - 1));
+
+    setInterval(() => { showSlide(index + 1); }, 4000);
+  </script>
+</body>
 </html>
