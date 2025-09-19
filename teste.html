@@ -44,7 +44,7 @@
       align-items: center;
       gap: 15px;
       margin-top: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       width: 100%;
       max-width: 600px;
     }
@@ -65,7 +65,7 @@
       aspect-ratio: 1 / 1; /* forçar quadrado */
       overflow: hidden;
       border-radius: 20px;
-      margin-bottom: 18px;
+      margin-bottom: 8px;
       background: rgba(0,0,0,0.25);
     }
     .carousel_wrapper { display:flex; transition: transform 0.5s ease-in-out; height:100%; }
@@ -95,7 +95,7 @@
       gap: 14px;
       width: 100%;
       max-width: 600px;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
     }
     .btn-card {
       display: flex;
@@ -110,10 +110,26 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.45);
       transition: transform 0.2s ease;
       padding: 6px 12px;
+      gap: 12px;
     }
     .btn-card:hover { transform: scale(1.03); }
     .btn-card img { width:80px; height:80px; object-fit: cover; border-radius: 12px; }
-    .btn-card span { flex:1; text-align:center; font-size:18px; }
+
+    .btn-text {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      text-align: left;
+    }
+    .btn-text .title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .btn-text .subtitle {
+      font-size: 14px;
+      font-weight: normal;
+      opacity: 0.75;
+    }
 
     /* ===== responsividade ===== */
     @media (max-width: 768px) {
@@ -126,6 +142,8 @@
       header h1 { font-size: 18px; }
       header p { font-size: 12px; }
       .btn-card img { width: 50px; height: 50px; }
+      .btn-text .title { font-size: 16px; }
+      .btn-text .subtitle { font-size: 12px; }
     }
   </style>
 </head>
@@ -140,7 +158,7 @@
       <img src="images/img.png" alt="Logo">
       <div>
         <h1>Loja wohtech</h1>
-        <p>Campo Grande ms</p>
+        <p><em>Campo Grande ms</em></p>
       </div>
     </header>
 
@@ -156,17 +174,23 @@
 
     <div class="btn-container">
       <a href="https://wa.me/seunumerodetelefone" target="_blank" class="btn-card">
-        <img src="images/img.png" alt="Botão 1">
-        <span>Whatsapp</span>
+        <img src="images/whatsapp.png" alt="Botão 1">
+        <div class="btn-text">
+          <span class="title">Fale Conosco pelo Whatsapp</span>
+          <span class="subtitle">Atendimento + rápido</span>
+        </div>
       </a>
       <a href="https://wa.me/seunumerodetelefone" target="_blank" class="btn-card">
-        <img src="images/img.png" alt="Botão 2">
-        <span>Grupo VIP</span>
+        <img src="images/gift-box.png" alt="Botão 2">
+        <div class="btn-text">
+          <span class="title">Grupo VIP 🛍️</span>
+          <span class="subtitle">Ofertas exclusivas toda semana</span>
+        </div>
       </a>
     </div>
   </div>
 
-  <!-- ===== scripts: fundo espacial + carrossel (tudo aqui para garantir ordem) ===== -->
+  <!-- ===== scripts: fundo espacial + carrossel ===== -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       /* ===== Fundo espacial (canvas) ===== */
@@ -196,7 +220,7 @@
               x: Math.random() * width,
               y: Math.random() * height,
               size: Math.random() * 1.6 + 0.3,
-              speed: Math.random() * 60 + 8, // px por segundo
+              speed: Math.random() * 60 + 8,
               twinkle: Math.random() * Math.PI * 2
             });
           }
@@ -205,23 +229,16 @@
         function draw(dt) {
           ctx.clearRect(0, 0, width, height);
 
-          // fundo sutil (pode ser deixado preto)
-          // ctx.fillStyle = '#000';
-          // ctx.fillRect(0,0,width,height);
-
           for (let s of stars) {
-            // movimento
             s.x -= s.speed * dt;
             if (s.x < -4) s.x = width + 4;
 
-            // twinkle
             s.twinkle += dt * 3;
             const alpha = 0.6 + 0.4 * Math.sin(s.twinkle);
 
             ctx.beginPath();
             ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-            // leve brilho
             ctx.shadowBlur = s.size * 2;
             ctx.shadowColor = 'rgba(255,255,255,0.15)';
             ctx.fill();
@@ -230,7 +247,7 @@
         }
 
         function loop(now) {
-          const dt = Math.min(0.06, (now - lastTime) / 1000); // dt em segundos (cap em 60ms)
+          const dt = Math.min(0.06, (now - lastTime) / 1000);
           lastTime = now;
           draw(dt);
           requestAnimationFrame(loop);
@@ -241,7 +258,7 @@
         requestAnimationFrame(loop);
       })();
 
-      /* ===== Carrossel (autoplay + swipe) ===== */
+      /* ===== Carrossel ===== */
       (function initCarousel() {
         const wrapper = document.getElementById("carouselWrapper");
         const prevBtn = document.getElementById("prevBtn");
@@ -266,7 +283,7 @@
         prevBtn.addEventListener("click", () => { prevSlide(); resetAutoplay(); });
         nextBtn.addEventListener("click", () => { nextSlide(); resetAutoplay(); });
 
-        function startAutoplay() { autoplayInterval = setInterval(nextSlide, 4000); } // 4000ms = 4s
+        function startAutoplay() { autoplayInterval = setInterval(nextSlide, 4000); }
         function resetAutoplay() { clearInterval(autoplayInterval); startAutoplay(); }
         startAutoplay();
 
@@ -280,7 +297,7 @@
         });
       })();
 
-    }); /* DOMContentLoaded */
+    });
   </script>
 </body>
 </html>
