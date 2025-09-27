@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loja Wohtech</title>
+  <style>
+    /* ===== fonts / layout (mantive Arial como pedido) ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif; /* <-- fonte anterior mantida */
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    /* ===== canvas de fundo ===== */
+    #space {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none; /* não bloqueia interações com o conteúdo */
+      background: #000;
+      display: block;
+    }
+
+    /* ===== conteúdo por cima do fundo ===== */
+    .content {
+      position: relative;
+      z-index: 1; /* acima do canvas */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      gap: 16px;
+      min-height: 100vh;
+    }
+
+    /* Cabeçalho */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 12px;
+      margin-bottom: 10px;
+      width: 100%;
+      max-width: 600px;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    header h1 { font-size: 28px; font-weight: bold; }
+    header p { font-size: 16px; font-style: italic; }
+
+    /* Carrossel (quadrado) */
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      aspect-ratio: 1 / 1; /* forçar quadrado */
+      overflow: hidden;
+      border-radius: 20px;
+      margin-bottom: 8px;
+      background: rgba(0,0,0,0.25);
+    }
+    .carousel_wrapper { display:flex; transition: transform 0.5s ease-in-out; height:100%; }
+    .card { min-width:100%; height:100%; }
+    .card img { width:100%; height:100%; object-fit: cover; border-radius:20px; }
+
+    .carousel_btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 50%;
+      z-index: 2;
+    }
+    .carousel_btn.left { left: 10px; }
+    .carousel_btn.right { right: 10px; }
+
+    /* Botões com foto */
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 10px;
+    }
+    .btn-card {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      overflow: hidden;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.45);
+      transition: transform 0.2s ease;
+      padding: 6px 12px;
+      gap: 12px;
+    }
+    .btn-card:hover { transform: scale(1.03); }
+    .btn-card img { width:80px; height:80px; object-fit: cover; border-radius: 12px; }
+
+    .btn-text {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      text-align: left;
+    }
+    .btn-text .title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .btn-text .subtitle {
+      font-size: 14px;
+      font-weight: normal;
+      opacity: 0.75;
+    }
+
+    /* ===== responsividade ===== */
+    @media (max-width: 768px) {
+      header h1 { font-size: 22px; }
+      header p { font-size: 14px; }
+      .btn-card img { width: 60px; height: 60px; }
+    }
+    @media (max-width: 480px) {
+      header img { width: 46px; height: 46px; }
+      header h1 { font-size: 18px; }
+      header p { font-size: 12px; }
+      .btn-card img { width: 50px; height: 50px; }
+      .btn-text .title { font-size: 16px; }
+      .btn-text .subtitle { font-size: 12px; }
+    }
+  </style>
+</head>
+
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+  ttq.load('D36O1ORC77U15FSVMK6G');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+ <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1656747348330083');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1656747348330083&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<body>
+
+  <!-- Canvas do fundo espacial -->
+  <canvas id="space" aria-hidden="true"></canvas>
+
+  <!-- Conteúdo da página -->
+  <div class="content">
+    <header>
+      <img src="images/img.png" alt="Logo">
+      <div>
+        <h1>Loja wohtech</h1>
+        <p><em>Campo Grande ms</em></p>
+      </div>
+    </header>
+
+    <div class="carousel" id="carousel">
+      <div class="carousel_wrapper" id="carouselWrapper">
+        <div class="card"><img src="images/22.png" alt="Slide 1"></div>
+        <div class="card"><img src="images/4.png" alt="Slide 2"></div>
+        <div class="card"><img src="images/5.png" alt="Slide 3"></div>
+      </div>
+      <button class="carousel_btn left" id="prevBtn">&#10094;</button>
+      <button class="carousel_btn right" id="nextBtn">&#10095;</button>
+    </div>
+
+    <div class="btn-container">
+      <a href="https://wa.me/message/INEUTMQ2IWZXI1" target="_blank" class="btn-card">
+        <img src="images/whatsapp.png" alt="Botão 1">
+        <div class="btn-text">
+          <span class="title">Fale Conosco pelo Whatsapp</span>
+          <span class="subtitle">Atendimento + rápido</span>
+        </div>
+      </a>
+      </div>
+  </div>
+
+  <!-- ===== scripts: fundo espacial + carrossel ===== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      /* ===== Fundo espacial (canvas) ===== */
+      (function initSpace() {
+        const canvas = document.getElementById('space');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        let width, height, dpr;
+        let lastTime = performance.now();
+
+        function resize() {
+          dpr = window.devicePixelRatio || 1;
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.style.width = width + 'px';
+          canvas.style.height = height + 'px';
+          canvas.width = Math.floor(width * dpr);
+          canvas.height = Math.floor(height * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+          // recalcula estrelas (densidade proporcional)
+          stars = [];
+          const area = width * height;
+          const base = Math.max(60, Math.round(area / 6000)); // ajusta densidade conforme tela
+          for (let i = 0; i < base; i++) {
+            stars.push({
+              x: Math.random() * width,
+              y: Math.random() * height,
+              size: Math.random() * 1.6 + 0.3,
+              speed: Math.random() * 60 + 8,
+              twinkle: Math.random() * Math.PI * 2
+            });
+          }
+        }
+
+        function draw(dt) {
+          ctx.clearRect(0, 0, width, height);
+
+          for (let s of stars) {
+            s.x -= s.speed * dt;
+            if (s.x < -4) s.x = width + 4;
+
+            s.twinkle += dt * 3;
+            const alpha = 0.6 + 0.4 * Math.sin(s.twinkle);
+
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+            ctx.shadowBlur = s.size * 2;
+            ctx.shadowColor = 'rgba(255,255,255,0.15)';
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+        }
+
+        function loop(now) {
+          const dt = Math.min(0.06, (now - lastTime) / 1000);
+          lastTime = now;
+          draw(dt);
+          requestAnimationFrame(loop);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        requestAnimationFrame(loop);
+      })();
+
+      /* ===== Carrossel ===== */
+      (function initCarousel() {
+        const wrapper = document.getElementById("carouselWrapper");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const cards = document.querySelectorAll(".card");
+        const carousel = document.getElementById("carousel");
+        let currentIndex = 0;
+        let autoplayInterval;
+
+        function updateCarousel() {
+          wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+        function nextSlide() {
+          currentIndex = (currentIndex + 1) % cards.length;
+          updateCarousel();
+        }
+        function prevSlide() {
+          currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+          updateCarousel();
+        }
+
+        prevBtn.addEventListener("click", () => { prevSlide(); resetAutoplay(); });
+        nextBtn.addEventListener("click", () => { nextSlide(); resetAutoplay(); });
+
+        function startAutoplay() { autoplayInterval = setInterval(nextSlide, 4000); }
+        function resetAutoplay() { clearInterval(autoplayInterval); startAutoplay(); }
+        startAutoplay();
+
+        // Swipe touch
+        let startX = 0;
+        carousel.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, {passive: true});
+        carousel.addEventListener("touchend", (e) => {
+          const endX = e.changedTouches[0].clientX;
+          if (startX > endX + 50) { nextSlide(); resetAutoplay(); }
+          else if (startX < endX - 50) { prevSlide(); resetAutoplay(); }
+        });
+      })();
+
+    });
+  </script>
+</body>
+</html>
